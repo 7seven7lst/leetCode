@@ -35,21 +35,6 @@ var addTwoNumbers = function(l1, l2) {
   while (l1 !== null || l2!== null) {
     var val1;
     var val2;
-    /* handle the carry
-    var digit = l1.val + l2.val;
-    if (digit > 9) {
-      digit -= 10;
-      carry = 1;
-    } else {
-      digit = digit + carry;
-      carry = 0;
-    }
-
-    if (digit > 9 ) {
-      digit -= 10;
-      carry = 1;
-    }
-    */
     if (l1 === null) {
       val1=0;
     } else {
@@ -60,7 +45,16 @@ var addTwoNumbers = function(l1, l2) {
     } else {
       val2=l2.val;
     }
-    sumNode.val = val1+val2;
+    prevCarry=carry;
+
+    var digit = val1+val2+prevCarry;
+    if (digit >9) {
+      digit-=10;
+      carry=1;
+    } else {
+      carry=0;
+    }
+    sumNode.val = digit;
     l1=l1.next || null;
     l2=l2.next || null;
     if (l1 !== null || l2 !== null) {
